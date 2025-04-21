@@ -10,12 +10,11 @@
     "prepare": "husky install",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
+    "format": "prettier . --write",
     "lint-format": "eslint . --fix && prettier --write ."
-
   },
   "lint-staged": {
-    "src/**/*.ts": "yarn lint-format" 
+    "src/**/*.ts": "yarn lint-format"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
