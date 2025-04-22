@@ -1,0 +1,1 @@
+export const roleEnum = ["admin", "student", "faculty", "librarian", "superAdmin", "superFaculty"]

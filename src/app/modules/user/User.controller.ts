@@ -57,8 +57,14 @@ const getUserById = CatchAsync(async (req: Request, res: Response, next: NextFun
 const updateUser = CatchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 
     const { id } = req.params;
-    const { ...user } = req.body;
-    const updatedUser = await UserService.updateUser(id, user);
+
+    const user = await UserService.getUserById(id);
+
+    if (!user) {
+        throw new ApiError(404, 'Failed to get user');
+    }
+    const { ...payload } = req.body;
+    const updatedUser = await UserService.updateUser(id, payload);
     if (!updatedUser) {
         throw new ApiError(404, 'Failed to update user');
     }
