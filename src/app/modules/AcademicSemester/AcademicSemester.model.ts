@@ -1,7 +1,8 @@
 import { model, Model, Schema } from "mongoose";
 import { IAcademicSemester } from "./AcademicSemester.interface";
-import { AcademicSemesterCodes, AcademicSemesterTitles } from "./AcademicSemester.constants";
+import { AcademicSemesterCodes, AcademicSemesterMonths, AcademicSemesterTitles } from "./AcademicSemester.constants";
 import { ApiError } from "../../../Error/ApiError";
+import { titleCodeMapper } from "./AcademicSemester.utils";
 
 const academicSemesterSchema = new Schema<IAcademicSemester>({
     title: {
@@ -22,10 +23,12 @@ const academicSemesterSchema = new Schema<IAcademicSemester>({
     startMonth: {
         type: String,
         required: true,
+        enum: AcademicSemesterMonths
     },
     endMonth: {
         type: String,
         required: true,
+        enum: AcademicSemesterMonths
     }
 }, {
     timestamps: true
@@ -39,8 +42,18 @@ const academicSemesterSchema = new Schema<IAcademicSemester>({
         return next(new ApiError(409, "Academic semester already exists"));
 
     }
+
+    const expectedCode = titleCodeMapper[this.title as keyof typeof titleCodeMapper];
+
+    if (this.code !== expectedCode) {
+        return next(new ApiError(400, `Code is not valid for ${this.title}`));
+    }
+
     next();
 });
+
+
+
 
 type IAcademicSemesterModel = Model<IAcademicSemester, object>;
 

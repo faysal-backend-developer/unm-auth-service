@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UserController } from "./User.controller";
-import { validateRequest } from "../../utils/validateReuest";
+import { validateRequest } from "../../utils/validateRequest";
 import { UserValidation } from "./User.validation";
 
 

@@ -1,10 +1,24 @@
 export type IAcademicSemesterTitle = 'Autumn' | 'Summer' | 'Fall';
 export type IAcademicSemesterCode = '01' | '02' | '03';
+export type TMonth =
+    | "January"
+    | "February"
+    | "March"
+    | "April"
+    | "May"
+    | "June"
+    | "July"
+    | "August"
+    | "September"
+    | "October"
+    | "November"
+    | "December";
+
 
 export type IAcademicSemester = {
     title: IAcademicSemesterTitle;
     year: number;
     code: IAcademicSemesterCode;
-    startMonth: string;
-    endMonth: string;
+    startMonth: TMonth
+    endMonth: TMonth
 }
